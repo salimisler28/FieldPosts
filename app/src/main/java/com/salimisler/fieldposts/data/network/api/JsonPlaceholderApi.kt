@@ -14,7 +14,7 @@ interface JsonPlaceholderApi {
     suspend fun getPosts(): Response<List<PostDto>>
 
     @POST("posts")
-    suspend fun createPosts(
+    suspend fun createPost(
         @Body request: CreatePostRequest
     ): Response<Unit>
 
