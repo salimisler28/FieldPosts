@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.salimisler.fieldposts">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".FieldCodeApp"
         android:allowBackup="true"
