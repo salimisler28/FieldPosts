@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.salimisler.fieldposts.R
 import com.salimisler.fieldposts.databinding.FragmentFavsBinding
+import com.salimisler.fieldposts.presantation.base.BaseBottomNavFragment
 import com.salimisler.fieldposts.presantation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavsFragment : BaseFragment<FragmentFavsBinding, FavsViewModel>(R.layout.fragment_favs) {
+class FavsFragment : BaseBottomNavFragment<FragmentFavsBinding, FavsViewModel>(R.layout.fragment_favs) {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFavsBinding
         get() = FragmentFavsBinding::inflate
 

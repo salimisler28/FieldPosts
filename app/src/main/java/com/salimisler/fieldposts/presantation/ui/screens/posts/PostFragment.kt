@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.salimisler.fieldposts.R
 import com.salimisler.fieldposts.databinding.FragmentPostsBinding
+import com.salimisler.fieldposts.presantation.base.BaseBottomNavFragment
 import com.salimisler.fieldposts.presantation.base.BaseFragment
 import com.salimisler.fieldposts.presantation.ui.screens.posts.adapter.PostsController
 import com.salimisler.fieldposts.presantation.ui.utils.gone
@@ -17,7 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class PostFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layout.fragment_posts) {
+class PostFragment :
+    BaseBottomNavFragment<FragmentPostsBinding, PostsViewModel>(R.layout.fragment_posts) {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPostsBinding
         get() = FragmentPostsBinding::inflate
 
@@ -56,7 +58,7 @@ class PostFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layout
 
     private fun initListeners() {
         postsController.onItemClickListener = {
-
+            navigateToDetailScreen(it.id)
         }
 
         postsController.onFavClickListener = {
@@ -74,4 +76,8 @@ class PostFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layout
         }
     }
 
+    private fun navigateToDetailScreen(id: Int) {
+        val bundle = Bundle().apply { putInt("POST_ID", id) }
+        navigate(R.id.action_global_to_post_detail, bundle)
+    }
 }
