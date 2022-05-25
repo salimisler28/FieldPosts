@@ -2,6 +2,7 @@ package com.salimisler.fieldposts.presantation.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.salimisler.fieldposts.presantation.ui.MainActivity
@@ -24,5 +25,10 @@ abstract class BaseBottomNavFragment<VB : ViewBinding, VM : BaseViewModel> const
     fun navigate(id: Int, data: Bundle) {
         bottomNavFragment.findNavController()
             .navigate(id, data)
+    }
+
+    fun navigate(navDirections: NavDirections) {
+        bottomNavFragment.findNavController()
+            .navigate(navDirections)
     }
 }

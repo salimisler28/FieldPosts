@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.salimisler.fieldposts.NavMainActivityDirections
 import com.salimisler.fieldposts.R
 import com.salimisler.fieldposts.databinding.FragmentPostsBinding
 import com.salimisler.fieldposts.presantation.base.BaseBottomNavFragment
@@ -77,7 +79,7 @@ class PostFragment :
     }
 
     private fun navigateToDetailScreen(id: Int) {
-        val bundle = Bundle().apply { putInt("POST_ID", id) }
-        navigate(R.id.action_global_to_post_detail, bundle)
+        val action = NavMainActivityDirections.actionGlobalToPostDetail(id)
+        navigate(action)
     }
 }

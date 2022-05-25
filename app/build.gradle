@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.squareup.sqldelight'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
