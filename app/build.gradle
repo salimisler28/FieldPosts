@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.squareup.sqldelight'
 }
 
 android {
@@ -74,4 +75,14 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
+
+    // SqlDelight
+    implementation "com.squareup.sqldelight:android-driver:1.5.3"
+    implementation "com.squareup.sqldelight:coroutines-extensions:1.2.1"
+}
+
+sqldelight {
+    AppDatabase {
+        packageName = "com.salimisler.fieldposts"
+    }
 }
