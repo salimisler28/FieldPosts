@@ -3,6 +3,7 @@ package com.salimisler.fieldposts.data.datasources.database
 import appdb.FavsEntity
 import com.salimisler.fieldposts.AppDatabase
 import com.salimisler.fieldposts.core.Resource
+import com.salimisler.fieldposts.data.utils.getFromDatabase
 import com.salimisler.fieldposts.data.utils.listenDatabase
 import com.salimisler.fieldposts.data.utils.updateDatabase
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -29,5 +30,9 @@ class FavsDatabaseDataSource @Inject constructor(
 
     fun deleteById(id: Long): Flow<Resource<Unit>> {
         return updateDatabase { queries.deleteById(id) }
+    }
+
+    fun getById(id: Long): Flow<Resource<FavsEntity>> {
+        return getFromDatabase { queries.getById(id).executeAsOneOrNull() }
     }
 }

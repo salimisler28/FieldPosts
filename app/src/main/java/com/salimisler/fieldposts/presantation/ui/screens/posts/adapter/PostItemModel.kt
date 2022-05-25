@@ -30,6 +30,12 @@ abstract class PostItemModel : EpoxyModelWithHolder<PostItemModel.ViewHolder>() 
         holder.apply {
             tvTitle.text = item?.title
             tvBody.text = item?.body
+
+            ivFavToggle.setOnClickListener {
+                item?.let { onFavClickListener?.invoke(it) }
+            }
+
+            ivFavToggle.setFavImageResource(item?.isFav)
         }
     }
 
@@ -45,11 +51,11 @@ abstract class PostItemModel : EpoxyModelWithHolder<PostItemModel.ViewHolder>() 
         }
     }
 
-    private fun getFavToggleImageResource(isFav: Boolean?): Int {
-        return if (isFav == true) {
-            R.drawable.ic_heard_filled
+    private fun ImageView.setFavImageResource(isFav: Boolean?) {
+        if (isFav == true) {
+            this.setImageResource(R.drawable.ic_heard_filled)
         } else {
-            R.drawable.ic_heard_unfilled
+            this.setImageResource(R.drawable.ic_heard_unfilled)
         }
     }
 

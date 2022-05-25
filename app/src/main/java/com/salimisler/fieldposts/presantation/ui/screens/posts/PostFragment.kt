@@ -60,7 +60,7 @@ class PostFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layout
         }
 
         postsController.onFavClickListener = {
-
+            viewModel.toggleFav(it)
         }
     }
 

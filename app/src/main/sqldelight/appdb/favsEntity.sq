@@ -12,3 +12,6 @@ INSERT OR REPLACE INTO favsEntity VALUES(?, ?, ?);
 
 deleteById:
 DELETE FROM favsEntity WHERE id = :id;
+
+getById:
+SELECT * FROM favsEntity WHERE  id = :id;

@@ -1,5 +1,6 @@
 package com.salimisler.fieldposts.data.utils
 
+import appdb.FavsEntity
 import com.salimisler.fieldposts.core.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -35,9 +36,20 @@ inline fun <T> listenDatabase(
 
 inline fun updateDatabase(
     crossinline query: suspend () -> Unit
-) = flow<Resource<Unit>> {
+) = flow {
     val result = query.invoke()
-    Resource.success(result)
+    emit(Resource.success(result))
+}.onStart {
+    emit(Resource.loading())
+}.catch {
+    emit(Resource.error(it.localizedMessage))
+}.flowOn(Dispatchers.IO)
+
+inline fun <T> getFromDatabase(
+    crossinline query: () -> T?
+) = flow {
+    val result = query.invoke()
+    emit(Resource.success(result))
 }.onStart {
     emit(Resource.loading())
 }.catch {
