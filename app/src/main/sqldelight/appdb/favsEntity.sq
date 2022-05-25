@@ -1,0 +1,14 @@
+CREATE TABLE favsEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    body TEXT NOT NULL
+);
+
+listenAll:
+SELECT * FROM favsEntity;
+
+insert:
+INSERT OR REPLACE INTO favsEntity VALUES(?, ?, ?);
+
+deleteById:
+DELETE FROM favsEntity WHERE id = :id;
