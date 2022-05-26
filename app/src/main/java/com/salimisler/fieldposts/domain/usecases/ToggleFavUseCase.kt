@@ -21,7 +21,7 @@ class ToggleFavUseCase @Inject constructor(
         val title = params.post.title
         val body = params.post.body
 
-        return jsonPlaceholderRepository.getById(id)
+        return jsonPlaceholderRepository.getFavById(id)
             .flatMapMerge {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {

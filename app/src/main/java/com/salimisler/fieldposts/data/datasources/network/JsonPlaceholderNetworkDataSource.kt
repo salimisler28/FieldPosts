@@ -9,6 +9,7 @@ class JsonPlaceholderNetworkDataSource @Inject constructor(
     private val jsonPlaceHolderApi: JsonPlaceholderApi
 ) {
     fun getPosts() = networkRequest { jsonPlaceHolderApi.getPosts() }
+    fun getPostById(id: Int) = networkRequest { jsonPlaceHolderApi.getPostById(id) }
 
     fun createPost(createPostRequest: CreatePostRequest) =
         networkRequest { jsonPlaceHolderApi.createPost(createPostRequest) }

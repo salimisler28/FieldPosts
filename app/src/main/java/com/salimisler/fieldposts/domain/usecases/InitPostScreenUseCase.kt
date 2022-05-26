@@ -9,8 +9,6 @@ import com.salimisler.fieldposts.domain.model.PostUiModel
 import com.salimisler.fieldposts.domain.repositories.JsonPlaceholderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class InitPostScreenUseCase @Inject constructor(
@@ -26,7 +24,7 @@ class InitPostScreenUseCase @Inject constructor(
     override fun invoke(params: ParamsIn): Flow<Resource<ParamsOut>> {
         return combine(
             jsonPlaceholderRepository.getAllPosts(),
-            jsonPlaceholderRepository.getAllFavs()
+            jsonPlaceholderRepository.listenAllFavs()
         ) { _posts, _favs ->
             when {
                 _posts.status == Resource.Status.SUCCESS && _favs.status == Resource.Status.SUCCESS -> {

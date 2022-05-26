@@ -17,7 +17,11 @@ class FavsDatabaseDataSource @Inject constructor(
     private val queries = db.favsEntityQueries
 
     fun listen(): Flow<Resource<List<FavsEntity>>> {
-        return listenDatabase { queries.listenAll().asFlow().mapToList() }
+        return listenDatabase { queries.getAll().asFlow().mapToList() }
+    }
+
+    fun get(): Flow<Resource<List<FavsEntity>>> {
+        return getFromDatabase { queries.getAll().executeAsList() }
     }
 
     fun insert(

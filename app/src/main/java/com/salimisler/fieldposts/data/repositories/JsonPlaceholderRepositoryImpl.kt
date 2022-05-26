@@ -4,6 +4,7 @@ import appdb.FavsEntity
 import com.salimisler.fieldposts.core.Resource
 import com.salimisler.fieldposts.data.datasources.database.FavsDatabaseDataSource
 import com.salimisler.fieldposts.data.datasources.network.JsonPlaceholderNetworkDataSource
+import com.salimisler.fieldposts.data.network.dto.CommentDto
 import com.salimisler.fieldposts.data.network.dto.PostDto
 import com.salimisler.fieldposts.domain.repositories.JsonPlaceholderRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +18,20 @@ class JsonPlaceholderRepositoryImpl @Inject constructor(
         return jsonPlaceholderNetworkDataSource.getPosts()
     }
 
-    override fun getAllFavs(): Flow<Resource<List<FavsEntity>>> {
+    override fun getPostById(id: Int): Flow<Resource<PostDto>> {
+        return jsonPlaceholderNetworkDataSource.getPostById(id)
+    }
+
+    override fun getCommentsByPostId(id: Int): Flow<Resource<List<CommentDto>>> {
+        return jsonPlaceholderNetworkDataSource.getCommentsByPostId(id)
+    }
+
+    override fun listenAllFavs(): Flow<Resource<List<FavsEntity>>> {
         return favsDatabaseDataSource.listen()
+    }
+
+    override fun getAllFavs(): Flow<Resource<List<FavsEntity>>> {
+        return favsDatabaseDataSource.get()
     }
 
     override fun addFav(
@@ -33,7 +46,7 @@ class JsonPlaceholderRepositoryImpl @Inject constructor(
         return favsDatabaseDataSource.deleteById(id)
     }
 
-    override fun getById(id: Long): Flow<Resource<FavsEntity>> {
+    override fun getFavById(id: Long): Flow<Resource<FavsEntity>> {
         return favsDatabaseDataSource.getById(id)
     }
 }
