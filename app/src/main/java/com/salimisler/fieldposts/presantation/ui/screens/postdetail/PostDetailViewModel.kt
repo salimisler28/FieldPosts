@@ -4,7 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.salimisler.fieldposts.core.Resource
 import com.salimisler.fieldposts.domain.model.PostDetailUiModel
+import com.salimisler.fieldposts.domain.model.PostUiModel
 import com.salimisler.fieldposts.domain.usecases.InitPostDetailUseCase
+import com.salimisler.fieldposts.domain.usecases.ToggleFavUseCase
 import com.salimisler.fieldposts.presantation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PostDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val initPostDetailUseCase: InitPostDetailUseCase
+    private val initPostDetailUseCase: InitPostDetailUseCase,
+    private val toggleFavUseCase: ToggleFavUseCase
 ) : BaseViewModel() {
     val postId = savedStateHandle.get<Int>("postId")
 
@@ -45,6 +48,15 @@ class PostDetailViewModel @Inject constructor(
                         }
                     }
                 }
+        }
+    }
+
+
+
+    fun toggleFav(postUiModel: PostUiModel) = viewModelScope.launch {
+        val params = ToggleFavUseCase.ParamsIn(postUiModel)
+        toggleFavUseCase.invoke(params).collectLatest {
+            // here can add states for ui
         }
     }
 }
