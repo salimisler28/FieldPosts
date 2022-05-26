@@ -34,7 +34,7 @@ import com.salimisler.fieldposts.domain.model.PostUiModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostDetailFragment : Fragment(R.layout.fragment_post_detail) {
+class PostDetailFragment : Fragment() {
     val viewModel: PostDetailViewModel by viewModels()
 
     override fun onCreateView(

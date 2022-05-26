@@ -9,6 +9,7 @@ import com.salimisler.fieldposts.domain.usecases.InitPostDetailUseCase
 import com.salimisler.fieldposts.domain.usecases.ToggleFavUseCase
 import com.salimisler.fieldposts.presantation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -37,6 +38,8 @@ class PostDetailViewModel @Inject constructor(
                 .collectLatest {
                     when (it.status) {
                         Resource.Status.SUCCESS -> {
+                            // The reason why we have this delay is to prevent the small freezing in navigation anim
+                            delay(200)
                             hideLoading()
                             _postDetailMSF.value = it.data?.postDetail
                         }
