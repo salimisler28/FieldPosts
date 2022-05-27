@@ -35,7 +35,7 @@ class InitPostDetailUseCaseTest {
     }
 
     @Test
-    fun `ded`() = runBlocking {
+    fun test() = runBlocking {
         // given
         val postId = 1
         val title = ""
